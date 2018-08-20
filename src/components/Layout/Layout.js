@@ -8,9 +8,17 @@ const StyledLayout = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #4e54c8;
-  background: -webkit-linear-gradient(to right, #8f94fb, #4e54c8);
-  background: linear-gradient(to right, #8f94fb, #4e54c8);
+  background: ${props => props.theme.main};
+  background: -webkit-linear-gradient(
+    to right,
+    ${props => props.theme.main},
+    ${props => props.theme.secondary}
+  );
+  background: linear-gradient(
+    to right,
+    ${props => props.theme.main},
+    ${props => props.theme.secondary}
+  );
 `;
 
 class Layout extends Component {

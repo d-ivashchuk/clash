@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const StyledButton = styled.button`
   color: #fff !important;
   text-transform: uppercase;
-  background: ${props => (props.color ? props.color : '#8f94fb')};
+  background: ${props => (props.color ? props.color : props.theme.main)};
   padding: 15px;
   border-radius: 5px;
   display: block;

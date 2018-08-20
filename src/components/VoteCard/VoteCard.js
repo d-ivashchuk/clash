@@ -1,42 +1,45 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
+import Card from '../../ui/Card/Card.js';
 
+import { db } from '../../firebase';
+
+import TextLoader from '../../ui/TextLoader/TextLoader.js';
 import IconSection from './IconSection/IconSection.js';
 import ButtonSection from './ButtonSection/ButtonSection.js';
 import CurrentBalance from './CurrentBalance/CurrentBalance.js';
 
-import { shadow } from '../../styles/utils/shadow.js';
-import { borderRadius } from '../../styles/utils/borderRadius.js';
-
-const StyledVoteCard = styled.div`
-  height: 100%;
-  width: 100%;
-  max-width: 350px;
-  max-height: 300px;
-  background: white;
-  padding: 20px;
-  ${shadow};
-  ${borderRadius};
-  h1 {
-    text-align: center;
-    color: #666;
-    margin-bottom: 10px;
-  }
-`;
 class VoteCard extends Component {
+  state = {
+    votes: null
+  };
+
+  componentDidMount() {
+    db.onceGetVotes().then(snapshot =>
+      this.setState(() => ({
+        ...this.state,
+        votes: snapshot.val().votes
+      }))
+    );
+  }
   render() {
+    const { first, second, firstIcon, secondIcon, voteHandler } = this.props;
     return (
-      <StyledVoteCard>
+      <Card>
         <h1>
-          {this.props.first} vs {this.props.second}
+          {first} vs {second}
         </h1>
-        <IconSection
-          firstIcon={this.props.firstIcon}
-          secondIcon={this.props.secondIcon}
+        <IconSection firstIcon={firstIcon} secondIcon={secondIcon} />
+        <ButtonSection
+          first={first}
+          second={second}
+          voteHandler={voteHandler}
         />
-        <ButtonSection first={this.props.first} second={this.props.second} />
-        <CurrentBalance />
-      </StyledVoteCard>
+        {this.state.votes ? (
+          <CurrentBalance votes={this.state.votes} />
+        ) : (
+          <TextLoader height="20px" width="80%" lines="1" />
+        )}
+      </Card>
     );
   }
 }
