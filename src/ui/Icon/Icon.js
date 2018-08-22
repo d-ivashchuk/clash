@@ -8,6 +8,7 @@ const StyledIcon = styled.img`
   border: 2px solid #4e54c8;
   border-radius: 70px;
   padding: 5px;
+  margin: 10px;
 `;
 const Icon = props => (
   <StyledIcon src={props.src} height={props.height} width={props.width} />

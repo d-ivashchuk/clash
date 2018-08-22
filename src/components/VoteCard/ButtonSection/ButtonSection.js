@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { db } from '../../../firebase';
+import { auth } from '../../../firebase';
 
 import Button from '../../../ui/Button/Button.js';
 
@@ -15,16 +16,19 @@ class ButtonSection extends Component {
     db.doIncreaseOf('first');
     db.doIncreaseOf('total');
     this.props.voteHandler('first');
+    auth.doAnonymousSignIn();
   };
   increaseSecond = () => {
     db.doIncreaseOf('second');
     db.doIncreaseOf('total');
     this.props.voteHandler('second');
+    auth.doAnonymousSignIn();
   };
   increaseDraw = () => {
     db.doIncreaseOf('draw');
     db.doIncreaseOf('total');
     this.props.voteHandler('draw');
+    auth.doAnonymousSignIn();
   };
 
   render() {

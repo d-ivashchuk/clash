@@ -7,7 +7,7 @@ const StyledIconSection = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  margin: 20px auto 20px auto;
+  margin: auto;
 `;
 
 class IconSection extends Component {

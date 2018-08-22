@@ -26,7 +26,7 @@ class VoteCard extends Component {
     return (
       <Card>
         <h1>
-          {first} vs {second}
+          {first} <span style={{ color: '#999' }}>vs</span> {second}
         </h1>
         <IconSection firstIcon={firstIcon} secondIcon={secondIcon} />
         <ButtonSection

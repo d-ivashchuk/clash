@@ -11,6 +11,10 @@ const StyledCard = styled.div`
   max-height: 300px;
   background: white;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
   ${shadow};
   ${borderRadius};

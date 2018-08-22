@@ -3,9 +3,10 @@ import styled from 'styled-components';
 
 const StyledCurrentBalance = styled.div`
   display: flex;
-  margin: 10px auto 0 auto;
-  width: 80%;
+  margin: auto;
+  width: 85%;
   justify-content: center;
+  align-items: flex-start;
 `;
 
 const Bar = styled.div`
@@ -48,7 +49,7 @@ class CurrentBalance extends Component {
           />
         </StyledCurrentBalance>
         {labeled ? (
-          <StyledCurrentBalance>
+          <StyledCurrentBalance style={{ position: 'relative', top: '-30px' }}>
             <Label width={firstFraction}>{firstFraction}</Label>
             <Label width={drawFraction}>{drawFraction}</Label>
             <Label width={secondFraction}>{secondFraction}</Label>
