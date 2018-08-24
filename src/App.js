@@ -40,7 +40,14 @@ class App extends Component {
     db.onceGetClashes().then(snapshot =>
       this.setState({
         clashes: Object.entries(snapshot.val()).map(e =>
-          Object.assign(e[1], { key: e[0] })
+          Object.assign(
+            e[1],
+            { key: e[0] },
+            {
+              voted: false,
+              voteChoice: null
+            }
+          )
         )
       })
     );
@@ -54,30 +61,43 @@ class App extends Component {
     });
   };
 
+  handle = (id, voteChoice) => {
+    const updatedArray = this.state.clashes.map(e => {
+      if (e.key === id) {
+        return { ...e, voted: !e.voted, voteChoice: voteChoice };
+      } else {
+        return e;
+      }
+    });
+    this.setState({ ...this.state, clashes: updatedArray });
+  };
+
   render() {
     const { voted, voteChoice, clashes } = this.state;
-    console.log(clashes);
+    console.log(this.state);
+
     return (
       <ThemeProvider theme={theme}>
         <BrowserRouter>
           <Layout>
             <Route
               exact
-              path={routes.LANDING}
+              path={'/clash:id'}
               render={() => {
                 return clashes ? (
                   !voted ? (
                     <VoteCard
-                      first={clashes[0].names.first}
-                      second={clashes[0].names.second}
                       firstIcon={firebase}
                       secondIcon={node}
                       voteHandler={this.voteHandler}
+                      test={this.handle}
+                      clashes={clashes}
                     />
                   ) : (
                     <ResultCard
                       voteChoice={voteChoice}
                       voteHandler={this.voteHandler}
+                      clashes={clashes}
                     />
                   )
                 ) : (
@@ -91,11 +111,11 @@ class App extends Component {
               }}
             />
             <Route exact path={routes.LANDING} component={Clashes} />
+            <Route path={'/clash:id'} component={Clashes} />
           </Layout>
         </BrowserRouter>
       </ThemeProvider>
     );
   }
 }
-
 export default App;

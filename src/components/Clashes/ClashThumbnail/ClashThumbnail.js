@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import Button from '../../../ui/Button/Button';
+import Link from '../../../ui/Link/Link.js';
 
 import { shadow } from '../../../styles/utils/shadow.js';
 import { borderRadius } from '../../../styles/utils/borderRadius.js';
@@ -63,14 +63,14 @@ const StyledClashThumbnail = styled.div`
 
 class ClashThumbnail extends Component {
   render() {
-    const { names, votes } = this.props;
+    const { names, votes, id } = this.props;
     return (
       <StyledClashThumbnail>
         <p>
           {names.first} <span>vs</span> {names.second}
         </p>
         <StyledBalance color="red" votes={votes} />
-        <Button label="To clash" />
+        <Link route={`/clash${id}`} label="to clash" />
       </StyledClashThumbnail>
     );
   }

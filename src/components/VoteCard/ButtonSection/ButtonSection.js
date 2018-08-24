@@ -13,21 +13,24 @@ const StyledButtonSection = styled.div`
 
 class ButtonSection extends Component {
   increaseFirst = () => {
-    db.doIncreaseOf('first');
-    db.doIncreaseOf('total');
-    this.props.voteHandler('first');
+    db.doIncreaseOf('first', this.props.clashId);
+    db.doIncreaseOf('total', this.props.clashId);
+    this.props.test(this.props.clashId, 'first');
+    // this.props.voteHandler('first');
     auth.doAnonymousSignIn();
   };
   increaseSecond = () => {
-    db.doIncreaseOf('second');
-    db.doIncreaseOf('total');
-    this.props.voteHandler('second');
+    db.doIncreaseOf('second', this.props.clashId);
+    db.doIncreaseOf('total', this.props.clashId);
+    this.props.test(this.props.clashId, 'second');
+    // this.props.voteHandler('second');
     auth.doAnonymousSignIn();
   };
   increaseDraw = () => {
-    db.doIncreaseOf('draw');
-    db.doIncreaseOf('total');
-    this.props.voteHandler('draw');
+    db.doIncreaseOf('draw', this.props.clashId);
+    db.doIncreaseOf('total', this.props.clashId);
+    this.props.test(this.props.clashId, 'draw');
+    // this.props.voteHandler('draw');
     auth.doAnonymousSignIn();
   };
 

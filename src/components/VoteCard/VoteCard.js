@@ -1,47 +1,36 @@
 import React, { Component } from 'react';
 import Card from '../../ui/Card/Card.js';
-
-import { db } from '../../firebase';
-
-import TextLoader from '../../ui/TextLoader/TextLoader.js';
+import { withRouter } from 'react-router-dom';
 import IconSection from './IconSection/IconSection.js';
 import ButtonSection from './ButtonSection/ButtonSection.js';
 import CurrentBalance from './CurrentBalance/CurrentBalance.js';
 
 class VoteCard extends Component {
-  state = {
-    votes: null
-  };
-
-  componentDidMount() {
-    db.onceGetVotes().then(snapshot =>
-      this.setState(() => ({
-        ...this.state,
-        votes: snapshot.val().votes
-      }))
-    );
-  }
   render() {
-    const { first, second, firstIcon, secondIcon, voteHandler } = this.props;
+    const { firstIcon, secondIcon, voteHandler, test, clashes } = this.props;
+
+    const currentClashId = this.props.location.pathname.slice(6);
+    const currentClash = clashes.filter(clash => clash.key === currentClashId);
+
     return (
       <Card>
         <h1>
-          {first} <span style={{ color: '#999' }}>vs</span> {second}
+          {currentClash[0].names.first}
+          <span style={{ color: '#999' }}> vs </span>
+          {currentClash[0].names.second}
         </h1>
         <IconSection firstIcon={firstIcon} secondIcon={secondIcon} />
         <ButtonSection
-          first={first}
-          second={second}
+          first={currentClash[0].names.first}
+          second={currentClash[0].names.second}
           voteHandler={voteHandler}
+          test={test}
+          clashId={currentClashId}
         />
-        {this.state.votes ? (
-          <CurrentBalance votes={this.state.votes} />
-        ) : (
-          <TextLoader height="20px" width="80%" lines="1" />
-        )}
+        <CurrentBalance votes={currentClash[0].votes} />
       </Card>
     );
   }
 }
 
-export default VoteCard;
+export default withRouter(VoteCard);

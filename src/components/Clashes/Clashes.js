@@ -25,6 +25,7 @@ class Clashes extends Component {
             key={clash.key}
             names={clash.names}
             votes={clash.votes}
+            id={clash.key}
           />
         ))
       : null;
