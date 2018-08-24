@@ -3,16 +3,12 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import { db } from './firebase';
 import * as routes from './constants/routes.js';
 
+import ClashCard from './components/ClashCard/ClashCard.js';
 import Clashes from './components/Clashes/Clashes.js';
 import Layout from './components/Layout/Layout.js';
-import VoteCard from './components/VoteCard/VoteCard.js';
-import ResultCard from './components/ResultCard/ResultCard.js';
 import Loader from 'react-loader-spinner';
 
 import { injectGlobal, ThemeProvider } from 'styled-components';
-
-import node from './assets/node.svg';
-import firebase from './assets/firebase.svg';
 
 injectGlobal`
 *{
@@ -31,8 +27,6 @@ const theme = {
 
 class App extends Component {
   state = {
-    voted: false,
-    voteChoice: null,
     clashes: null
   };
 
@@ -73,8 +67,7 @@ class App extends Component {
   };
 
   render() {
-    const { voted, voteChoice, clashes } = this.state;
-    console.log(this.state);
+    const { clashes } = this.state;
 
     return (
       <ThemeProvider theme={theme}>
@@ -85,21 +78,7 @@ class App extends Component {
               path={'/clash:id'}
               render={() => {
                 return clashes ? (
-                  !voted ? (
-                    <VoteCard
-                      firstIcon={firebase}
-                      secondIcon={node}
-                      voteHandler={this.voteHandler}
-                      test={this.handle}
-                      clashes={clashes}
-                    />
-                  ) : (
-                    <ResultCard
-                      voteChoice={voteChoice}
-                      voteHandler={this.voteHandler}
-                      clashes={clashes}
-                    />
-                  )
+                  <ClashCard clashes={clashes} test={this.handle} />
                 ) : (
                   <Loader
                     type="TailSpin"

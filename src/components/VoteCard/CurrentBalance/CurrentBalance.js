@@ -23,7 +23,7 @@ const Label = styled.div`
 `;
 
 const calcFract = (numerator, denominator) => {
-  return Math.round((numerator / denominator) * 100);
+  return Math.round(numerator / denominator * 100);
 };
 
 class CurrentBalance extends Component {
@@ -49,7 +49,7 @@ class CurrentBalance extends Component {
           />
         </StyledCurrentBalance>
         {labeled ? (
-          <StyledCurrentBalance style={{ position: 'relative', top: '-30px' }}>
+          <StyledCurrentBalance style={{ position: 'relative', top: '-10px' }}>
             <Label width={firstFraction}>{firstFraction}</Label>
             <Label width={drawFraction}>{drawFraction}</Label>
             <Label width={secondFraction}>{secondFraction}</Label>

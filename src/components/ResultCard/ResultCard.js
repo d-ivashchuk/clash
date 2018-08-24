@@ -12,7 +12,7 @@ const StyledChoice = styled.p`
   color: ${props => props.theme.main}
   text-decoration: underline;
 `;
-const StyledPeers = styled.span`
+const StyledPeers = styled.p`
   color: ${props => props.theme.secondary};
   font-weight: 200;
 `;
@@ -24,32 +24,45 @@ class ResultCard extends Component {
       this.props.location.pathname.slice(6)
     );
     db.doDecreaseOf('total', this.props.location.pathname.slice(6));
-    this.props.voteHandler();
+    this.props.test(this.props.clashId);
   };
 
   render() {
-    const { voteChoice, clashes } = this.props;
+    const { clashes } = this.props;
 
-    const currentClash = clashes.filter(
-      clash => clash.key === this.props.location.pathname.slice(6)
-    );
+    const currentClashId = this.props.location.pathname.slice(6);
+    const currentClash = clashes.filter(clash => clash.key === currentClashId);
 
     return (
       <Card>
-        {voteChoice === 'draw' ? (
-          <h1>That's really nice of you to support both!</h1>
+        {currentClash[0].voteChoice === 'draw' ? (
+          <h1>
+            That's really nice of you to support both!
+            <StyledPeers>
+              {currentClash[0].votes[currentClash[0].voteChoice]}
+            </StyledPeers>{' '}
+            people did so!
+          </h1>
         ) : (
           <h1>
             You and{' '}
-            {<StyledPeers>{currentClash[0].votes[voteChoice]}</StyledPeers>}{' '}
+            {
+              <StyledPeers>
+                {currentClash[0].votes[currentClash[0].voteChoice]}
+              </StyledPeers>
+            }{' '}
             others have chosen{' '}
-            {<StyledChoice>{currentClash[0].names[voteChoice]}</StyledChoice>}
+            {
+              <StyledChoice>
+                {currentClash[0].names[currentClash[0].voteChoice]}
+              </StyledChoice>
+            }
           </h1>
         )}
         <React.Fragment>
           <CurrentBalance
             votes={currentClash[0].votes}
-            active={voteChoice}
+            active={currentClash[0].voteChoice}
             labeled
           />
           <Button clicked={this.decrease} label="redo" />
