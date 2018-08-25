@@ -1,6 +1,17 @@
 {
-  "main.js": "static/js/main.37c2113e.js",
-  "main.js.map": "static/js/main.37c2113e.js.map",
-  "static/media/firebase.svg": "static/media/firebase.ff203c4e.svg",
-  "static/media/node.svg": "static/media/node.af8540cb.svg"
+  "main.js": "static/js/main.f89faf89.js",
+  "main.js.map": "static/js/main.f89faf89.js.map",
+  "static/media/adidas.svg": "static/media/adidas.330a6cd7.svg",
+  "static/media/apple.svg": "static/media/apple.0e27920a.svg",
+  "static/media/atom.svg": "static/media/atom.87e72261.svg",
+  "static/media/clash.svg": "static/media/clash.7d8c59a8.svg",
+  "static/media/firebase.svg": "static/media/firebase.1e018093.svg",
+  "static/media/github.svg": "static/media/github.6249536d.svg",
+  "static/media/gitlab.svg": "static/media/gitlab.707c56c4.svg",
+  "static/media/nike.svg": "static/media/nike.67a938c0.svg",
+  "static/media/node.svg": "static/media/node.2dcf8a39.svg",
+  "static/media/playstation.svg": "static/media/playstation.ab8a97fb.svg",
+  "static/media/samsung.svg": "static/media/samsung.e9bb6a9f.svg",
+  "static/media/sublime.svg": "static/media/sublime.4443a3c0.svg",
+  "static/media/xbox.svg": "static/media/xbox.5acdd3d4.svg"
 }
