@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 
 class ClashCard extends Component {
   render() {
-    const { clashes, firstIcon, secondIcon, test } = this.props;
+    const { clashes, firstIcon, secondIcon, handleVote } = this.props;
 
     const currentClashId = this.props.location.pathname.slice(6);
     const currentClash = clashes.filter(clash => clash.key === currentClashId);
@@ -17,14 +17,14 @@ class ClashCard extends Component {
             clashes={clashes}
             firstIcon={firstIcon}
             secondIcon={secondIcon}
-            test={test}
+            handleVote={handleVote}
           />
         ) : (
           <ResultCard
             clashes={clashes}
             firstIcon={firstIcon}
             secondIcon={secondIcon}
-            test={test}
+            handleVote={handleVote}
             clashId={currentClashId}
             voteChoice={voteChoice}
           />

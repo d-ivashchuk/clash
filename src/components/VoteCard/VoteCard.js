@@ -5,18 +5,22 @@ import IconSection from './IconSection/IconSection.js';
 import ButtonSection from './ButtonSection/ButtonSection.js';
 import CurrentBalance from './CurrentBalance/CurrentBalance.js';
 
-import adidas from '../../assets/adidas.svg';
 import nike from '../../assets/nike.svg';
+import adidas from '../../assets/adidas.svg';
 import node from '../../assets/node.svg';
 import firebase from '../../assets/firebase.svg';
 import apple from '../../assets/apple.svg';
 import samsung from '../../assets/samsung.svg';
 import github from '../../assets/github.svg';
 import gitlab from '../../assets/gitlab.svg';
+import atom from '../../assets/atom.svg';
+import sublime from '../../assets/sublime.svg';
+import playstation from '../../assets/playstation.svg';
+import xbox from '../../assets/xbox.svg';
 
 class VoteCard extends Component {
   render() {
-    const { voteHandler, test, clashes } = this.props;
+    const { voteHandler, handleVote, clashes } = this.props;
 
     const currentClashId = this.props.location.pathname.slice(6);
     const currentClash = clashes.filter(clash => clash.key === currentClashId);
@@ -31,12 +35,19 @@ class VoteCard extends Component {
       case 'firebase':
         firstIcon = firebase;
         break;
-      case 'adidas':
-        firstIcon = adidas;
+      case 'nike':
+        firstIcon = nike;
         break;
       case 'github':
         firstIcon = github;
         break;
+      case 'atom':
+        firstIcon = atom;
+        break;
+      case 'playstation':
+        firstIcon = playstation;
+        break;
+
       default:
         break;
     }
@@ -47,12 +58,19 @@ class VoteCard extends Component {
       case 'node':
         secondIcon = node;
         break;
-      case 'nike':
-        secondIcon = nike;
+      case 'adidas':
+        secondIcon = adidas;
         break;
       case 'gitlab':
         secondIcon = gitlab;
         break;
+      case 'sublime':
+        secondIcon = sublime;
+        break;
+      case 'xbox':
+        secondIcon = xbox;
+        break;
+
       default:
         break;
     }
@@ -69,7 +87,7 @@ class VoteCard extends Component {
           first={currentClash[0].names.first}
           second={currentClash[0].names.second}
           voteHandler={voteHandler}
-          test={test}
+          handleVote={handleVote}
           clashId={currentClashId}
         />
         <CurrentBalance votes={currentClash[0].votes} />

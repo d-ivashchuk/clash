@@ -3,10 +3,16 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import { db } from './firebase';
 import * as routes from './constants/routes.js';
 
+import theme from './styles/theme/theme.js';
+
+import Logo from './ui/Logo/Logo.js';
 import ClashCard from './components/ClashCard/ClashCard.js';
 import Clashes from './components/Clashes/Clashes.js';
 import Layout from './components/Layout/Layout.js';
 import Loader from 'react-loader-spinner';
+import LogoWrapper from './ui/Logo/LogoWrapper/Logowrapper.js';
+
+import clash from './assets/clash.svg';
 
 import { injectGlobal, ThemeProvider } from 'styled-components';
 
@@ -20,10 +26,6 @@ body{
   text-rendering: optimizeLegibility;
 }
 `;
-const theme = {
-  main: '#8f94fb',
-  secondary: '#4e54c8'
-};
 
 class App extends Component {
   state = {
@@ -47,15 +49,7 @@ class App extends Component {
     );
   }
 
-  voteHandler = voteChoice => {
-    this.setState({
-      ...this.state,
-      voted: !this.state.voted,
-      voteChoice: voteChoice
-    });
-  };
-
-  handle = (id, voteChoice) => {
+  handleVote = (id, voteChoice) => {
     const updatedArray = this.state.clashes.map(e => {
       if (e.key === id) {
         return { ...e, voted: !e.voted, voteChoice: voteChoice };
@@ -69,6 +63,13 @@ class App extends Component {
   render() {
     const { clashes } = this.state;
 
+    const loader = (
+      <LogoWrapper>
+        <Logo src={clash} width="200px" height="200px" />
+        <Loader type="TailSpin" color="white" height={80} width={80} />
+      </LogoWrapper>
+    );
+
     return (
       <ThemeProvider theme={theme}>
         <BrowserRouter>
@@ -78,18 +79,19 @@ class App extends Component {
               path={'/clash:id'}
               render={() => {
                 return clashes ? (
-                  <ClashCard clashes={clashes} test={this.handle} />
+                  <ClashCard clashes={clashes} handleVote={this.handleVote} />
                 ) : (
-                  <Loader
-                    type="TailSpin"
-                    color="white"
-                    height={80}
-                    width={80}
-                  />
+                  loader
                 );
               }}
             />
-            <Route exact path={routes.LANDING} component={Clashes} />
+            <Route
+              exact
+              path={routes.LANDING}
+              render={() => {
+                return clashes ? <Clashes /> : loader;
+              }}
+            />
             <Route path={'/clash:id'} component={Clashes} />
           </Layout>
         </BrowserRouter>

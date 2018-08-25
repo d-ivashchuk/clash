@@ -15,22 +15,19 @@ class ButtonSection extends Component {
   increaseFirst = () => {
     db.doIncreaseOf('first', this.props.clashId);
     db.doIncreaseOf('total', this.props.clashId);
-    this.props.test(this.props.clashId, 'first');
-    // this.props.voteHandler('first');
+    this.props.handleVote(this.props.clashId, 'first');
     auth.doAnonymousSignIn();
   };
   increaseSecond = () => {
     db.doIncreaseOf('second', this.props.clashId);
     db.doIncreaseOf('total', this.props.clashId);
-    this.props.test(this.props.clashId, 'second');
-    // this.props.voteHandler('second');
+    this.props.handleVote(this.props.clashId, 'second');
     auth.doAnonymousSignIn();
   };
   increaseDraw = () => {
     db.doIncreaseOf('draw', this.props.clashId);
     db.doIncreaseOf('total', this.props.clashId);
-    this.props.test(this.props.clashId, 'draw');
-    // this.props.voteHandler('draw');
+    this.props.handleVote(this.props.clashId, 'draw');
     auth.doAnonymousSignIn();
   };
 

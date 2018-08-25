@@ -6,7 +6,7 @@ import { shadow } from '../../../styles/utils/shadow.js';
 import { borderRadius } from '../../../styles/utils/borderRadius.js';
 
 const calcFract = (numerator, denominator) => {
-  return Math.round((numerator / denominator) * 100);
+  return Math.round(numerator / denominator * 100);
 };
 
 const StyledBalance = styled.div`
@@ -18,14 +18,15 @@ const StyledBalance = styled.div`
   max-height: 5px;
   background-image: linear-gradient(
     to right,
-    #8f94fb,
-    #8f94fb ${props => calcFract(props.votes.first, props.votes.total)}%,
+    ${props => props.theme.main},
+    ${props => props.theme.main}
+      ${props => calcFract(props.votes.first, props.votes.total)}%,
     #ccc ${props => calcFract(props.votes.first, props.votes.total)}%,
     #ccc
       ${props =>
         calcFract(props.votes.first, props.votes.total) +
         calcFract(props.votes.draw, props.votes.total)}%,
-    #4e54c8
+    ${props => props.theme.secondary}
       ${props =>
         calcFract(props.votes.first, props.votes.total) +
         calcFract(props.votes.draw, props.votes.total)}%

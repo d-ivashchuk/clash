@@ -24,7 +24,7 @@ class ResultCard extends Component {
       this.props.location.pathname.slice(6)
     );
     db.doDecreaseOf('total', this.props.location.pathname.slice(6));
-    this.props.test(this.props.clashId);
+    this.props.handleVote(this.props.clashId);
   };
 
   render() {
