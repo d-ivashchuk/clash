@@ -7,7 +7,6 @@ const StyledClashesWrapper = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  margin: 5px;
   max-width: 700px;
 `;
 

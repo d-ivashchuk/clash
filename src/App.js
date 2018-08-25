@@ -24,6 +24,17 @@ injectGlobal`
 body{
   font-family: "brandon-grotesque", "Brandon Grotesque", "Source Sans Pro", "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
   text-rendering: optimizeLegibility;
+  background: #8f94fb;
+  background: -webkit-linear-gradient(
+    to right,
+    #8f94fb,
+    #4e54c8
+  );
+  background: linear-gradient(
+    to right,
+    #8f94fb,
+    #4e54c8
+  );
 }
 h1{
   font-size: 32px;

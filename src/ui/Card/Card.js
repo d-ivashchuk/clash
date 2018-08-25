@@ -9,8 +9,10 @@ const StyledCard = styled.div`
   width: 100%;
   max-width: 350px;
   max-height: 300px;
+  min-width: 270px;
   background: white;
-  padding: 20px;
+  margin: 15px auto;
+  padding: 15px 0 15px 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -25,7 +27,6 @@ const StyledCard = styled.div`
     margin-bottom: 10px;
   }
   @media (max-width: 600px) {
-    margin: 15px 15px 0 15px;
   }
 `;
 

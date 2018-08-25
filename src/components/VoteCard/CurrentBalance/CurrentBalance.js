@@ -49,7 +49,7 @@ class CurrentBalance extends Component {
           />
         </StyledCurrentBalance>
         {labeled ? (
-          <StyledCurrentBalance style={{ position: 'relative', top: '-10px' }}>
+          <StyledCurrentBalance>
             <Label width={firstFraction}>{firstFraction}</Label>
             <Label width={drawFraction}>{drawFraction}</Label>
             <Label width={secondFraction}>{secondFraction}</Label>
