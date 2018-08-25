@@ -5,7 +5,6 @@ import styled from 'styled-components';
 
 const StyledLayout = styled.div`
   position: fixed;
-  overflow: auto;
   width: 100%;
   height: 100%;
   display: flex;
@@ -23,6 +22,10 @@ const StyledLayout = styled.div`
     ${props => props.theme.main},
     ${props => props.theme.secondary}
   );
+
+  @media (max-width: 500px) {
+    align-content: stretch;
+  }
 `;
 
 class Layout extends Component {

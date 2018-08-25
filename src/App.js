@@ -5,16 +5,16 @@ import * as routes from './constants/routes.js';
 
 import theme from './styles/theme/theme.js';
 
-import Logo from './ui/Logo/Logo.js';
 import ClashCard from './components/ClashCard/ClashCard.js';
 import Clashes from './components/Clashes/Clashes.js';
 import Layout from './components/Layout/Layout.js';
 import Loader from 'react-loader-spinner';
+import Logo from './ui/Logo/Logo.js';
 import LogoWrapper from './ui/Logo/LogoWrapper/Logowrapper.js';
 
 import clash from './assets/clash.svg';
 
-import { injectGlobal, ThemeProvider } from 'styled-components';
+import { ThemeProvider, injectGlobal } from 'styled-components';
 
 injectGlobal`
 *{
@@ -24,6 +24,14 @@ injectGlobal`
 body{
   font-family: "brandon-grotesque", "Brandon Grotesque", "Source Sans Pro", "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
   text-rendering: optimizeLegibility;
+}
+h1{
+  font-size: 32px;
+}
+@media(max-width:500px){
+  h1{
+    font-size: 26px;
+  }
 }
 `;
 
