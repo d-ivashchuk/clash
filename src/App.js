@@ -15,6 +15,7 @@ import LogoWrapper from './ui/Logo/LogoWrapper/Logowrapper.js';
 import clash from './assets/clash.svg';
 
 import { ThemeProvider, injectGlobal } from 'styled-components';
+import styled from 'styled-components';
 
 injectGlobal`
 *{
@@ -24,16 +25,6 @@ injectGlobal`
 body{
   font-family: "brandon-grotesque", "Brandon Grotesque", "Source Sans Pro", "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
   text-rendering: optimizeLegibility;
-  background: #8f94fb;
-  background: -webkit-linear-gradient(
-    to right,
-    #8f94fb,
-    #4e54c8
-  );
-  background: linear-gradient(
-    to right,
-    #8f94fb,
-    #4e54c8
   );
 }
 h1{
@@ -44,6 +35,24 @@ h1{
     font-size: 26px;
   }
 }
+`;
+const StyledBackground = styled.div`
+  background: ${props => props.theme.main};
+  background: -webkit-linear-gradient(
+    to right,
+    ${props => props.theme.main},
+    ${props => props.theme.secondary}
+  );
+  background: linear-gradient(
+    to right,
+    ${props => props.theme.main},
+    ${props => props.theme.secondary}
+  );
+  background-position: 50%;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
 `;
 
 class App extends Component {
@@ -88,31 +97,45 @@ class App extends Component {
         <Loader type="TailSpin" color="white" height={80} width={80} />
       </LogoWrapper>
     );
+    const logo = (
+      <LogoWrapper>
+        <Logo src={clash} width="120px" height="120px" />
+      </LogoWrapper>
+    );
 
     return (
       <ThemeProvider theme={theme}>
         <BrowserRouter>
-          <Layout>
-            <Route
-              exact
-              path={'/clash:id'}
-              render={() => {
-                return clashes ? (
-                  <ClashCard clashes={clashes} handleVote={this.handleVote} />
-                ) : (
-                  loader
-                );
-              }}
-            />
-            <Route
-              exact
-              path={routes.LANDING}
-              render={() => {
-                return clashes ? <Clashes /> : loader;
-              }}
-            />
-            <Route path={'/clash:id'} component={Clashes} />
-          </Layout>
+          <React.Fragment>
+            <StyledBackground />
+            <Layout>
+              <Route
+                exact
+                path={'/clash:id'}
+                render={() => {
+                  return clashes ? (
+                    <React.Fragment>
+                      {logo}
+                      <ClashCard
+                        clashes={clashes}
+                        handleVote={this.handleVote}
+                      />
+                    </React.Fragment>
+                  ) : (
+                    loader
+                  );
+                }}
+              />
+              <Route
+                exact
+                path={routes.LANDING}
+                render={() => {
+                  return clashes ? <Clashes /> : loader;
+                }}
+              />
+              <Route path={'/clash:id'} component={Clashes} />
+            </Layout>
+          </React.Fragment>
         </BrowserRouter>
       </ThemeProvider>
     );
